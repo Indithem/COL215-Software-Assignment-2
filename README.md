@@ -27,3 +27,7 @@ git checkout HASH/BRANCH
 
 git branch
     about creating/ switching branches
+
+
+hello how are you
+test
