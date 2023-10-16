@@ -15,3 +15,15 @@ class Gate:
 class Graphs:
 
     #data structure to store a list of edges and vertices
+    def __init__():
+        pass
+
+    def add_vertex():
+        # add a string in a list to include this vertex
+        pass
+
+    def add_gate():
+        # for a gate, add a Gate Object
+        pass
+
+    
