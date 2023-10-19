@@ -70,6 +70,7 @@ public:
     std::unordered_map<std::string,Signal*> internal;
 
     std::vector<Gate*> Gates;
+    std::vector<Signal*> DFFInps;
 
 public:
     Circuit(){}

@@ -42,6 +42,8 @@ Circuit* read_from(std::string input_file_name){
     std::unordered_map<std::string,Signal*>& primary_outs=constructed_circuit->primary_outs;
     std::unordered_map<std::string,Signal*>& internal=constructed_circuit->internal;
     std::vector<Gate*>& gates=constructed_circuit->Gates;
+    std::vector<Signal*>& DFFInps=constructed_circuit->DFFInps;
+
 
     std::ifstream file(input_file_name);
 
@@ -52,7 +54,7 @@ Circuit* read_from(std::string input_file_name){
         std::istringstream lstream(line);
 
         lstream >> word;
-        if (word=="//"){continue;}
+        if (word.substr(0,2)=="//"){continue;}
 
         if (word=="PRIMARY_INPUTS"){
             while (!lstream.eof()){lstream >> word;primary_inps.insert({word,new Signal{word}});}
@@ -84,6 +86,7 @@ Circuit* read_from(std::string input_file_name){
             Signal* inputSignal = get_signal_from_inps(inp,primary_inps, internal, primary_outs);
             Signal* outpt = get_signal_from_outs(inp2,internal,primary_outs);
 
+            DFFInps.push_back(inputSignal);
             gates.push_back(new Gate{inputSignal,nullptr,outpt,dffGATE});
             continue;
         }
@@ -132,3 +135,4 @@ Circuit* read_from(std::string input_file_name){
 
     return constructed_circuit;
 }
+
