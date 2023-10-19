@@ -184,3 +184,11 @@ Gate_Variants* read_gateVarient_from(std::string input_file_name){
 
     return res;
 }
+
+long double read_gate_delay(std::string file_path){
+    std::ifstream file(file_path);
+    long double ans;
+
+    file>>ans;
+    return ans;
+}

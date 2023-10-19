@@ -81,14 +81,17 @@ long double Gate_States::make_state(unsigned short a, Gate* g) const{
     {
     case 0:
         g->time=T_low_area;
+        g->area=A_low_area;
         return A_low_area;
         break;
     case 1:
         g->time=T_mid_area;
+        g->area=A_mid_area;
         return A_mid_area;
         break;
     case 2:
         g->time=T_high_area;
+        g->area=A_high_area;
         return A_high_area;
         break;
     }
@@ -108,6 +111,8 @@ long double Gate_Variants::make_state(unsigned short a, Gate* g) const{
         return norStates.make_state(a,g);
     case notGATE:
         return notStates.make_state(a,g);
+    case dffGATE:
+        return 0;
     }
     return -1;
 }

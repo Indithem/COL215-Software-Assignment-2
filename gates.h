@@ -46,6 +46,7 @@ public:
     Signal* input2=nullptr;
     Signal* output=nullptr;
     long double time=0;
+    long double area=0;
     GateType gatetype=NOTDEFINED;
 
 public:

@@ -7,15 +7,34 @@ struct helper{
     string next_iter;
     long double iter_area;
 };
+
+bool Add_1(string& iterator){
+    int checker;
+    int carry=1;
+    for(int i=0;i<iterator.size();i++){
+        checker=(iterator[iterator.size()-1-i])-'0';
+        checker=checker+carry;
+        if(checker==3){
+            carry=1;
+            iterator[iterator.size()-1-i]='0';
+        }
+        else{
+            carry=0;
+            iterator[iterator.size()-1-i]=checker+'0';
+        }
+    }
+    return (carry!=1);
+}
+
 helper Calculating_suitable_area(string iterator,Circuit*given_circuit,Gate_Variants*types_of_gates,double long Present_valid_area){
     string present_iterator=iterator;
-    vector<Gate*>types_ofgates=given_circuit->Gates;
+    const vector<Gate*>&types_ofgates=given_circuit->Gates;
     double long checking_area=std::numeric_limits<double long>::infinity();
     bool check_completion;
     do{
         checking_area=0;
         for(int i=0;i<present_iterator.size();i++){
-            checking_area+=types_of_gates->make_state(present_iterator[i],types_ofgates[i]);
+            checking_area+=types_of_gates->make_state(present_iterator[i]-'0',types_ofgates[i]);
             if(checking_area>=Present_valid_area){
                 break;
             }
@@ -38,21 +57,4 @@ helper Calculating_suitable_area(string iterator,Circuit*given_circuit,Gate_Vari
         output.iter_area=checking_area;
     }
     return output;
-}
-bool Add_1(string& iterator){
-    int checker;
-    int carry=1;
-    for(int i=0;i<iterator.size();i++){
-        checker=(iterator[iterator.size()-1-i])-'0';
-        checker=checker+carry;
-        if(checker==3){
-            carry=1;
-            iterator[iterator.size()-1-i]='0';
-        }
-        else{
-            carry=0;
-            iterator[iterator.size()-1-i]=checker+'0';
-        }
-    }
-    return (carry!=1);
 }
