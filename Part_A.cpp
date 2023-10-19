@@ -30,7 +30,7 @@ long double Finding_max_delay_in_a_circuit(Circuit*given_circuit){
         temp_store=temporary_storage.top();
         if(temp_store->get_source()->get_type()==dffGATE){
             result_outvalues[temp_store]=0;
-            temporary_storage.pop();
+            temporary_storage.pop();   
         }
         else{
             if((result_outvalues.find(temp_store->get_source()->input1)!=result_outvalues.end())&&(result_outvalues.find(temp_store->get_source()->input2)!=result_outvalues.end())){
