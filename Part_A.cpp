@@ -4,7 +4,7 @@ using namespace std;
 
 void set_Gates_to_min(Circuit* c, Gate_Variants* v){
     for(Gate* gate: c->Gates){
-        v->make_state(0,gate);
+        v->make_state(2,gate);
     }
 }
 

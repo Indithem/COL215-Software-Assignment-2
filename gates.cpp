@@ -80,16 +80,16 @@ long double Gate_States::make_state(unsigned short a, Gate* g) const{
     switch (a)
     {
     case 0:
-        return A_low_area;
         g->time=T_low_area;
+        return A_low_area;
         break;
     case 1:
-        return A_mid_area;
         g->time=T_mid_area;
+        return A_mid_area;
         break;
     case 2:
-        return A_high_area;
         g->time=T_high_area;
+        return A_high_area;
         break;
     }
     return -2;
