@@ -1,8 +1,14 @@
 #include "gates.h"
 //return double value and takes a circuit pointer as input
-#include<bits/stdc++.h>
 using namespace std;
-double Finding_max_delay_in_a_circuit(Circuit*given_circuit){
+
+void set_Gates_to_min(Circuit* c, Gate_Variants* v){
+    for(Gate* gate: c->Gates){
+        v->make_state(0,gate);
+    }
+}
+
+long double Finding_max_delay_in_a_circuit(Circuit*given_circuit){
     unordered_map<string,Signal*>&out_puts_of_circuit=given_circuit->primary_outs;
     unordered_map<string,Signal*>&inputs_of_circuit=given_circuit->primary_inps;
     unordered_map<Signal*,long double>result_outvalues;
@@ -19,7 +25,7 @@ double Finding_max_delay_in_a_circuit(Circuit*given_circuit){
         temporary_storage.push(i->second);
     }
     Signal*temp_store;
-    double final_answer=0;
+    long double final_answer=0;
     while(temporary_storage.empty()!=true){
         temp_store=temporary_storage.top();
         if(temp_store->get_source()->get_type()==dffGATE){
