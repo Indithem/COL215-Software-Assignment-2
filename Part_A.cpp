@@ -8,7 +8,7 @@ void set_Gates_to_min(Circuit* c, Gate_Variants* v){
     }
 }
 
-long double Finding_max_delay_in_a_circuit(Circuit*given_circuit){
+long double Finding_max_delay_in_a_circuit(Circuit*given_circuit, long double& max_time){
     unordered_map<string,Signal*>&out_puts_of_circuit=given_circuit->primary_outs;
     unordered_map<string,Signal*>&inputs_of_circuit=given_circuit->primary_inps;
     unordered_map<Signal*,long double>result_outvalues;
@@ -37,6 +37,7 @@ long double Finding_max_delay_in_a_circuit(Circuit*given_circuit){
                 result_outvalues[temp_store]=max(result_outvalues[temp_store->get_source()->input1],result_outvalues[temp_store->get_source()->input2])+temp_store->get_source()->time;
                 if(final_answer<result_outvalues[temp_store]){
                     final_answer=result_outvalues[temp_store];
+                    if(final_answer>max_time){return std::numeric_limits<double long>::infinity();}
                 }
                 temporary_storage.pop();
                 continue;

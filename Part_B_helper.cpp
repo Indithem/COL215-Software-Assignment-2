@@ -1,8 +1,7 @@
 /* Helpers
 inputs:i(base3),Ciruit,gate_variants,Area
 Outputs:Struct{next i,Area}*/
-#include<bits/stdc++.h>
-#include<gates.h>
+#include"gates.h"
 using namespace std;
 struct helper{
     string next_iter;
