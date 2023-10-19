@@ -1,4 +1,6 @@
 #pragma once
+#include<bits/stdc++.h>
+
 #include<vector>
 #include<string>
 #include<iostream>
@@ -84,3 +86,33 @@ public:
     void print() const;
 
 };
+
+//stores time taken to process gate
+struct Gate_States{
+    double long T_low_area=std::numeric_limits<double long>::infinity();
+    double long T_mid_area=std::numeric_limits<double long>::infinity();
+    double long T_high_area=std::numeric_limits<double long>::infinity();
+
+    double long A_low_area=std::numeric_limits<double long>::infinity();
+    double long A_mid_area=std::numeric_limits<double long>::infinity();
+    double long A_high_area=std::numeric_limits<double long>::infinity();
+
+    void insert(const long double& time,const long double& area);
+    //gets area of a state while updating time of a Gate
+    long double make_state(unsigned short, Gate*) const;
+};
+
+class Gate_Variants
+{  
+public:
+    Gate_States andStates;
+    Gate_States orStates;
+    Gate_States nandStates;
+    Gate_States norStates;
+    Gate_States notStates;
+
+    //gets area of a state while updating time of a Gate
+    long double make_state(unsigned short, Gate*) const;
+
+};
+

@@ -54,3 +54,60 @@ void Circuit::print() const{
         cout<<"\n";
     }
 }
+
+void Gate_States::insert(const long double& time,const long double& area){
+    if(time==std::numeric_limits<double long>::infinity()){return;}
+    long double old_time, old_area;
+    if(area<=A_low_area){
+        old_time=T_low_area; old_area=A_low_area;
+        T_low_area=time; A_low_area=area;
+        insert(old_time,old_area);
+        return;
+    }
+    else if (area<=A_mid_area){
+        old_time=T_mid_area; old_area=A_mid_area;
+        T_mid_area=time; A_mid_area=area;
+        insert(old_time,old_area);
+        return;
+    }
+    else {
+        T_high_area=time; A_high_area=area;
+        return;
+    }
+}
+
+long double Gate_States::make_state(unsigned short a, Gate* g) const{
+    switch (a)
+    {
+    case 0:
+        return A_low_area;
+        g->time=T_low_area;
+        break;
+    case 1:
+        return A_mid_area;
+        g->time=T_mid_area;
+        break;
+    case 2:
+        return A_high_area;
+        g->time=T_high_area;
+        break;
+    }
+    return -2;
+}
+
+long double Gate_Variants::make_state(unsigned short a, Gate* g) const{
+    switch (g->gatetype)
+    {
+    case andGATE:
+        return andStates.make_state(a,g);
+    case orGATE:
+        return orStates.make_state(a,g);
+    case nandGATE:
+        return nandStates.make_state(a,g);
+    case norGATE:
+        return norStates.make_state(a,g);
+    case notGATE:
+        return notStates.make_state(a,g);
+    }
+    return -1;
+}

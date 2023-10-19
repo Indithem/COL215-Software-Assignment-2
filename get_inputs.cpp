@@ -33,7 +33,7 @@ Signal* get_signal_from_outs(const std::string& inp, const std::unordered_map<st
     return signal->second;
 }
 
-Circuit* read_from(std::string input_file_name){
+Circuit* read_circuit_from(std::string input_file_name){
     using namespace std;
 
     Circuit* constructed_circuit=new Circuit;
@@ -136,3 +136,51 @@ Circuit* read_from(std::string input_file_name){
     return constructed_circuit;
 }
 
+// const std::vector<std::string> Gate_Literals ={"nd","AND2","OR2","NAND2","NOR2","INV","DFF"};
+
+Gate_Variants* read_gateVarient_from(std::string input_file_name){
+    using namespace std;
+    Gate_Variants* res = new Gate_Variants;
+    
+    std::ifstream file(input_file_name);
+    string line, word;
+    while (std::getline(file,line))
+    {
+        if (line.empty()){continue;}
+        std::istringstream lstream(line);
+
+        lstream >> word;
+        if (word.substr(0,2)=="//"){continue;}
+
+        string gate;
+        lstream>>gate;
+        double time, area;
+        if(gate=="AND2"){
+            lstream>>time>>area;
+            res->andStates.insert(time,area);
+        }
+        else if(gate=="OR2"){
+            lstream>>time>>area;
+            res->orStates.insert(time,area);
+        }
+        else if(gate=="NAND2"){
+            lstream>>time>>area;
+            res->nandStates.insert(time,area);
+        }
+        else if(gate=="NOR2"){
+            lstream>>time>>area;
+            res->norStates.insert(time,area);
+        }
+        else if(gate=="INV"){
+            lstream>>time>>area;
+            res->notStates.insert(time,area);
+        }
+
+        else{
+            cout<<gate<<" is not a valid gate in line "<<line;
+            abort();
+        }
+    }
+
+    return res;
+}
