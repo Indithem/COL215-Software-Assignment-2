@@ -43,7 +43,7 @@ public:
     Signal* input1=nullptr;
     Signal* input2=nullptr;
     Signal* output=nullptr;
-
+    long double time=0;
     GateType gatetype=NOTDEFINED;
 
 public:
