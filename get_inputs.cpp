@@ -11,7 +11,7 @@ Signal* get_signal_from_inps(const std::string& inp,const std::unordered_map<std
             signal = primary_outs.find(inp);
             if (signal==primary_outs.end()){
                 std::cout<<"No signal named "+inp+" is found!";
-                abort();
+                exit(404);
             }
         }
     }
@@ -26,7 +26,7 @@ Signal* get_signal_from_outs(const std::string& inp, const std::unordered_map<st
         signal = primary_outs.find(inp);
         if (signal==primary_outs.end()){
             std::cout<<"No signal named "+inp+" is found!";
-            abort();
+            exit(404);
         }
     }
 
@@ -129,7 +129,7 @@ Circuit* read_circuit_from(std::string input_file_name){
         
         else {
             cout<<word<<" is not a valid gate!";
-            abort();
+            exit(404);
         }
     }
 
@@ -178,7 +178,7 @@ Gate_Variants* read_gateVarient_from(std::string input_file_name){
 
         else{
             cout<<gate<<" is not a valid gate in line "<<line;
-            abort();
+            exit(404);
         }
     }
 
@@ -191,4 +191,11 @@ long double read_gate_delay(std::string file_path){
 
     file>>ans;
     return ans;
+}
+
+void write_to_file(std::string file_path,long double ans){
+    std::ofstream file(file_path);
+
+    file<<ans;
+    return;
 }

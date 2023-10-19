@@ -9,7 +9,7 @@ void Signal::connect_to(Gate* g) {
 void Signal::connect_from(Gate* g) {
     if (sourceGate!=nullptr){
         std::cout<<"Signal "+name+" was connected from two inputs, previously connected to "+sourceGate->get_name();
-        abort();
+        exit(404);
     }
     sourceGate=g;
 }

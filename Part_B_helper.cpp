@@ -10,20 +10,21 @@ struct helper{
 
 bool Add_1(string& iterator){
     int checker;
-    int carry=1;
+    int carry=-1;
     for(int i=0;i<iterator.size();i++){
         checker=(iterator[iterator.size()-1-i])-'0';
         checker=checker+carry;
-        if(checker==3){
-            carry=1;
-            iterator[iterator.size()-1-i]='0';
+        if(checker==-1){
+            carry=-1;
+            iterator[iterator.size()-1-i]='2';
         }
         else{
             carry=0;
             iterator[iterator.size()-1-i]=checker+'0';
+            break;
         }
     }
-    return (carry!=1);
+    return (carry!=-1);
 }
 
 helper Calculating_suitable_area(string iterator,Circuit*given_circuit,Gate_Variants*types_of_gates,double long Present_valid_area){
